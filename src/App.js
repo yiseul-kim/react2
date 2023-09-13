@@ -17,6 +17,7 @@ function App() {
   return (
 
       // 숙제 버튼 누르면 글제목 가나다순 정렬 기능 만들기
+
     
     <div className="App">
 
@@ -29,6 +30,12 @@ function App() {
         copy[0] = '여자코트 추천';
         글제목변경(copy); 
       }}>글수정</button>
+
+      <button onClick={()=>{ 
+        let copy = [...글제목];
+        copy.sort();
+        글제목변경(copy);
+      }}>글정렬</button>
 
       <div className="list">
 
