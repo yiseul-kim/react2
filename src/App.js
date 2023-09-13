@@ -67,8 +67,7 @@ function App() {
 
       {
         // 삼항연산자 : 조건식 ? 참일때 실행할 코드 : 거짓일 때 실행할 코드 
-        modal == true ? <Modal  글제목작명={글제목}/> : null
-
+        modal == true ? <Modal  글제목작명={글제목} 글제목변경={글제목변경}/> : null
       }
 
     </div>
@@ -81,10 +80,17 @@ function Modal(props) {
     // style을 특정 부분에만 넣고싶을때는 props.color 이런식으로 넣어서 사용할 수 있다.
     // color="orange" 를 Modal 뒷부분에 넣으면 사용 가능
     // <div className="modal" style={{background : props.color}}>
-    <div className="modal" style={{background : props.color}}>
+    <div className="modal">
       <h4>{props.글제목작명[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+
+      <div><button onClick={ ()=>{
+        let copy = [...props.글제목작명];
+        copy[0] = '여자코트 추천';
+        props.글제목변경(copy);
+      }}>글수정</button></div>
+      
     </div>
   )
 }
