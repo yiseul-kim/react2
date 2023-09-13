@@ -16,9 +16,6 @@ function App() {
 
   return (
 
-      // 숙제 버튼 누르면 글제목 가나다순 정렬 기능 만들기
-
-    
     <div className="App">
 
       <div className="black-nav">
@@ -28,19 +25,11 @@ function App() {
       <button onClick={() => {
         let copy = [...글제목];
         copy[0] = '여자코트 추천';
-        글제목변경(copy); 
+        글제목변경(copy);
       }}>글수정</button>
 
-      <button onClick={()=>{ 
-        let copy = [...글제목];
-        copy.sort();
-        글제목변경(copy);
-      }}>글정렬</button>
-
       <div className="list">
-
-        <h4>
-          {글제목[0]} <span onClick={() => { 따봉변경(따봉 + 1) }}>👍</span>
+        <h4>{글제목[0]} <span onClick={() => { 따봉변경(따봉 + 1) }}>👍</span>
           {따봉} </h4>
         <p>2월 17일 발행</p>
       </div>
@@ -53,8 +42,20 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
 
+      <Modal />
+
     </div>
   );
+}
+
+function Modal() {
+  return (
+    <div className="modal1">
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
 }
 
 export default App;
