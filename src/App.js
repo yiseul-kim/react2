@@ -13,6 +13,7 @@ function App() {
   let [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이선독학']);
 
   let [따봉, 따봉변경] = useState(0);
+  let [modal, setModal] = useState(false);
 
   return (
 
@@ -22,7 +23,7 @@ function App() {
         <h4>ReactBlog</h4>
       </div>
 
-      <button onClick={() => {
+      <button onClick={() => {  
         let copy = [...글제목];
         copy[0] = '여자코트 추천';
         글제목변경(copy);
@@ -34,23 +35,28 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[1]}</h4>
+        <h4 >{글제목[1]}</h4>
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4 onClick={()=>{ setModal(true) }}>{글제목[2]}</h4>
         <p>2월 17일 발행</p>
       </div>
 
-      <Modal />
+      {
+        // 삼항연산자 : 조건식 ? 참일때 실행할 코드 : 거짓일 때 실행할 코드 
+        modal == true ? <Modal/> : null 
+
+      }
 
     </div>
   );
 }
 
+
 function Modal() {
   return (
-    <div className="modal1">
+    <div className="modal">
       <h4>제목</h4>
       <p>날짜</p>
       <p>상세내용</p>
