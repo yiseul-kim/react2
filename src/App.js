@@ -49,6 +49,7 @@ function App() {
         <p>2월 17일 발행</p>
       </div> */}
 
+
       {
         글제목.map(function (a, i) {
           return (
@@ -58,15 +59,30 @@ function App() {
                 {글제목[i]} <span onClick={() => { 따봉변경(따봉 + 1) }} >
                   👍</span> {따봉} </h4>
               <p>2월 17일 발행</p>
+              {/* 삭제가 가능한 기능 copy.splice(1,1); => 1번째 글이 1개 삭제됨. */}
+            <button onClick={()=>{
+              let copy = [...글제목];
+              copy.splice([i],1);
+              글제목변경(copy);
+            }}> 삭제 </button>
+
+
+
             </div>
           )
         })
       }
 
       <input onChange={(e) => {
-        입력값변경(e.target.value);
-        console.log(입력값);
+        입력값변경(e.target.value);  
       }} />
+      {/* 내용을 저장하는 방법 -> copy.unshift(저장소명); */}
+      <button onClick={()=>{
+        let copy = [...글제목];
+        copy.unshift(입력값);
+        글제목변경(copy);
+      }}>글발행</button>
+      
 
 
       {
@@ -76,7 +92,7 @@ function App() {
 
     </div>
   );
-}
+}  
 
 
 function Modal(props) {
