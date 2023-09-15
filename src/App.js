@@ -16,6 +16,8 @@ function App() {
   let [modal, setModal] = useState(false);
   let [title, settitle] = useState(0);
   let [입력값, 입력값변경] = useState(' ');
+  let [날짜, set날짜] = useState(['2월 17일 발행', '2월 17일 발행', '2월 17일 발행'])
+  let day = new Date().toLocaleDateString("en-us");
 
   [1, 2, 3].map(function (a) {
     return '12314123'
@@ -55,16 +57,16 @@ function App() {
           return (
             <div className="list" key={i}>
               {/* 이벤트 버블링(상위 html에서 이벤트를 받아오는 것) 막는 법 : e.stopPropagation(); */}
-              <h4 onClick={(e) => { e.stopPropagation(); setModal(true); settitle(i) }}>
+              <h4 onClick={(e) => { e.stopPropagation(); setModal(true); settitle(i);}}>
                 {글제목[i]} <span onClick={() => { 따봉변경(따봉 + 1) }} >
                   👍</span> {따봉} </h4>
-              <p>2월 17일 발행</p>
+              <p>{날짜[i]}</p>
               {/* 삭제가 가능한 기능 copy.splice(1,1); => 1번째 글이 1개 삭제됨. */}
-            <button onClick={()=>{
-              let copy = [...글제목];
-              copy.splice([i],1);
-              글제목변경(copy);
-            }}> 삭제 </button>
+              <button onClick={() => {
+                let copy = [...글제목];
+                copy.splice([i], 1);
+                글제목변경(copy);
+              }}> 삭제 </button>
 
 
 
@@ -74,25 +76,33 @@ function App() {
       }
 
       <input onChange={(e) => {
-        입력값변경(e.target.value);  
+        입력값변경(e.target.value);
       }} />
       {/* 내용을 저장하는 방법 -> copy.unshift(저장소명); */}
-      <button onClick={()=>{
-        let copy = [...글제목];
-        copy.unshift(입력값);
-        글제목변경(copy);
+      <button onClick={() => {
+        // if else를 이용해 공백값 입력 막기
+        if (입력값 === " ") { }
+        else {
+          let copy = [...글제목];
+          let copy1 = [...날짜];
+          copy.unshift(입력값);
+          copy1.unshift(day);
+          글제목변경(copy);  
+          set날짜(copy1);     
+        }
       }}>글발행</button>
-      
+
 
 
       {
         // 삼항연산자 : 조건식 ? 참일때 실행할 코드 : 거짓일 때 실행할 코드 
-        modal == true ? <Modal 글제목작명={글제목} title={title} /> : null
+        modal == true ? <Modal
+          글제목={글제목} title={title} /> : null
       }
 
     </div>
   );
-}  
+}
 
 
 function Modal(props) {
@@ -101,14 +111,15 @@ function Modal(props) {
     // color="orange" 를 Modal 뒷부분에 넣으면 사용 가능
     // <div className="modal" style={{background : props.color}}>
     <div className="modal">
-      <h4>{props.글제목작명[props.title]}</h4>
+      <h4>{props.글제목[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button>글수정</button>
+      </div>
 
-    </div>
   )
 }
+
 
 
 // 동적인 ui 만들기 3step
