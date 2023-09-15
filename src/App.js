@@ -57,7 +57,7 @@ function App() {
           return (
             <div className="list" key={i}>
               {/* 이벤트 버블링(상위 html에서 이벤트를 받아오는 것) 막는 법 : e.stopPropagation(); */}
-              <h4 onClick={(e) => { e.stopPropagation(); setModal(true); settitle(i);}}>
+              <h4 onClick={(e) => { e.stopPropagation(); setModal(true); settitle(i); }}>
                 {글제목[i]} <span onClick={() => { 따봉변경(따봉 + 1) }} >
                   👍</span> {따봉} </h4>
               <p>{날짜[i]}</p>
@@ -87,18 +87,16 @@ function App() {
           let copy1 = [...날짜];
           copy.unshift(입력값);
           copy1.unshift(day);
-          글제목변경(copy);  
-          set날짜(copy1);     
+          글제목변경(copy);
+          set날짜(copy1);
         }
       }}>글발행</button>
 
-
-
       {
         // 삼항연산자 : 조건식 ? 참일때 실행할 코드 : 거짓일 때 실행할 코드 
-        modal == true ? <Modal
-          글제목={글제목} title={title} /> : null
+        modal == true ? <Modal 글제목={글제목} title={title} /> : null
       }
+
 
     </div>
   );
@@ -115,11 +113,33 @@ function Modal(props) {
       <p>날짜</p>
       <p>상세내용</p>
       <button>글수정</button>
-      </div>
+    </div>
 
   )
 }
 
+// class를 이용한 옛날 React 문법
+/* 
+class Modal2 extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      name : 'kim',
+      age : 20
+    }
+  }
+  render(){
+    return(
+      <div>안녕 {this.state.age}
+        <button onClick={()=>{
+          this.setState({age : 21})
+        }}>버튼</button>
+      </div>
+      // 결과 : 안녕 20
+    )
+  }
+}
+*/
 
 
 // 동적인 ui 만들기 3step
